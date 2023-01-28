@@ -2,7 +2,9 @@
 version: '3'
 services:
     postgres_gis:
-      image: ${POSTGRES_GIS_IMAGE}
+      build: 
+            context: ./postgres_conf
+            dockerfile: Dockerfile
       ports:
         - 3342:3342
       networks:
