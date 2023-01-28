@@ -14,15 +14,15 @@ const type_titles = {
     'shop_region': 'Карта с рейтингом плотности магазинов по регионам',
 };
 const urls = {
-    'osm': "http://127.0.0.1:6789/data"+url_end, 
-    'dtp_hex': "http://127.0.0.1:6790/data"+url_end,
-    'dtp_region': "http://127.0.0.1:6791/data"+url_end,
-    'shop_hex': "http://127.0.0.1:6792/data"+url_end,
-    'shop_region': "http://127.0.0.1:6793/data"+url_end,
-    'maktab_hex': "http://127.0.0.1:6794/data"+url_end,
-    'maktab_region': "http://127.0.0.1:6795/data"+url_end,
-    'osm_liveness_hex': "http://127.0.0.1:6792/data"+url_end,
-    'osm_liveness_region': "http://127.0.0.1:6793/data"+url_end,
+    'osm': url+":6789/data"+url_end, 
+    'dtp_hex': url+":6790/data"+url_end,
+    'dtp_region': url+":6791/data"+url_end,
+    'shop_hex': url+":6792/data"+url_end,
+    'shop_region': url+":6793/data"+url_end,
+    'maktab_hex': url+":6794/data"+url_end,
+    'maktab_region': url+":6795/data"+url_end,
+    'osm_liveness_hex': url+":6796/data"+url_end,
+    'osm_liveness_region': url+":6797/data"+url_end,
 }
 const tile_options = {
     tileSize: 256,
@@ -45,7 +45,29 @@ map.addLayer(current_layer);
 // map.on('click', markerOnClick).addTo(map);
 map.on('click', function(e) {        
     var popLocation= e.latlng;
-    var result = getPoint(popLocation.lat, popLocation.lng, map.getZoom(), current_type);
+
+    getPoint(popLocation.lat, popLocation.lng, map.getZoom(), current_type)
+        .then(function (response) {
+            if(response.data)
+            {
+                document.getElementById("infografika-title").classList.add("no-show");
+                let type = current_type.split('_').pop();
+                if(type === 'osm'){
+                    document.getElementById("infografika-title").classList.remove("no-show");
+                } else if (type === 'hex')
+                {
+                    document.getElementById("infografika-hex").classList.remove("no-show");
+                    document.getElementById("rating_val").innerText = response.data.rating
+                    document.getElementById("count_val").innerText = response.data.count;
+                } else if (type === 'region') {
+                    document.getElementById("infografika-hex").classList.add("no-show");
+                    document.getElementById("infografika-region").classList.remove("no-show");
+                    document.getElementById("region-name").innerText = response.data.region
+                    document.getElementById("rating_val_region").innerText = response.data.rating
+                    document.getElementById("count_val_region").innerText = response.data.count;
+                }
+            }
+        });
     var popup = L.popup()
         .setLatLng(popLocation)
         .setContent('<p>Hello world!<br />This is a nice popup.</p>')
@@ -74,21 +96,12 @@ Object.keys(type_titles).forEach((key) => {
     selector.appendChild(opt);
 });
 function getPoint(lat, long, zoom, layer) {
-    axios.get('/api/point', {
+    return axios.get('/api/point', {
         params: {
             lat,
             long,
             layer,
             zoom
         }
-    })
-    .then(function (response) {
-        console.log(response);
-    })
-    .catch(function (error) {
-        console.log(error);
-    })
-    .then(function () {
-        // always executed
-    });  
+    });
 }
