@@ -14,13 +14,12 @@
         <script src="{{ asset('leaflet/leaflet.js') }}" crossorigin=""></script>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <link rel="stylesheet" href="{{ asset('components/grid/grid.css') }}">
-        <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        
         <style lang="css">
             .map{
-                height: 80vh; 
-                padding: 2rem;
+                z-index: 1000;
+                height: 100%; 
             }
             #map{
                 height: 100%; 
@@ -31,11 +30,14 @@
                 height: 100vh;
             }
             .nav_top {
-                box-shadow: -3px 19px 15px -4px rgba(0,0,0,0.55);
+                z-index: 100;
+                box-shadow: 1px 0px 5px 0px rgba(0,0,0,0.63);
             }
 
             .nav_left {
-                box-shadow: 6px 2px 9px -2px rgba(0,0,0,0.55);
+                z-index: 100;
+
+                box-shadow: 2px 1px 5px 0px rgba(0,0,0,0.63);
             }
 
             .flex-grow-1{
@@ -79,14 +81,15 @@
                     <img src="{{ asset('images/jt_logo.png') }}" height="100px" alt="joy-top logo" />
                 </div>
                 <div class="col-8 select-layer">
-                    <div style="padding: 10px;">
-                        <select id="select-layer" align-vertical onchange="changeLayer()">
+                    <div class="form-floating mt-4">
+                        <select id="select-layer" class="form-select"  onchange="changeLayer()">
                         </select>
+                        <label for="floatingSelect">Выберете тип карты</label>
                     </div>
                 </div>
             </div>
             <div class="row flex-grow-1 mt-0 align-self-stretch" style="margin-top: 0px!important;">
-                <div class="col-4 nav_left ">
+                <div class="col-3 nav_left ">
                     <div id="infografika-title">
                         <h1> 
                             Нажмите на карту 
@@ -103,7 +106,7 @@
                             <thead>
                                 <tr>
                                     <th class="col infografik-title">Rating</th>
-                                    <th class="col infografik-title">Count</th>
+                                    <th class="col infografik-title" id="info-count">Count</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -123,7 +126,7 @@
                             <thead>
                                 <tr>
                                     <th class="col infografik-title">Rating</th>
-                                    <th class="col infografik-title">Count</th>
+                                    <th class="col infografik-title" id="region-count">Count</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -134,8 +137,13 @@
                             </tbody>
                         </table>
                     </div>
+                    <hr>
+                    @include('legend.liveness_legend')
+                    @include('legend.dtp_legend')
+                    @include('legend.maktab_legend')
+                    @include('legend.shop_legend')
                 </div>
-                <div class="col-8">
+                <div class="col-9 p-0">
 
                     <div class="map">
                         <div id="map"></div>
@@ -143,8 +151,10 @@
                 </div>
             </div>
         </div>
-        <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
         <script src="{{ asset('axios.js') }}"></script>
-        <script src="{{ asset('map.js') }}"></script>
-    </body>
+        <script src="{{ asset('map.js') }}">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+  </body>
 </html>

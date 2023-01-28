@@ -1,7 +1,7 @@
 
-const url = "{{ config('app')['url_map'] }}";
+const url = "http://azamkhon.uz";
+const app_url = "http://datahack.azamkhon.uz";
 const url_end = '/tile/{z}/{x}/{y}{r}.png?t={version}';
-const app_url = "{{ config('app')['url'] }}";
 const type_titles = {
     'osm': 'Просто карта', 
     'osm_liveness_hex': 'Карта с рейтингом благополучия по секторам', 
@@ -32,6 +32,7 @@ const tile_options = {
     attribution: '<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         + '<a href="'+app_url+'">JOY-TOP</a>'
 };
+    marker = L.marker();
 let current_type = 'osm';
 var current_layer = L.tileLayer(urls.osm, {...tile_options});
 
@@ -52,28 +53,72 @@ map.on('click', function(e) {
             {
                 document.getElementById("infografika-title").classList.add("no-show");
                 let type = current_type.split('_').pop();
+                showOneLegend(current_type.split('_')[0]);
                 if(type === 'osm'){
                     document.getElementById("infografika-title").classList.remove("no-show");
                 } else if (type === 'hex')
                 {
-                    document.getElementById("infografika-hex").classList.remove("no-show");
-                    document.getElementById("rating_val").innerText = response.data.rating
-                    document.getElementById("count_val").innerText = response.data.count;
+                    showOneInfo(type);
+                    document.getElementById("rating_val").innerText = response.data.rating;
+                    if(typeof response.data.count === 'undefined')
+                    {
+                        document.getElementById("info-count").classList.add("no-show");
+                        document.getElementById("count_val").classList.add("no-show");
+                    }else{
+                        document.getElementById("info-count").classList.remove("no-show");
+                        document.getElementById("count_val").classList.remove("no-show");
+                        document.getElementById("count_val").innerText = response.data.count;
+                    }
+
                 } else if (type === 'region') {
-                    document.getElementById("infografika-hex").classList.add("no-show");
-                    document.getElementById("infografika-region").classList.remove("no-show");
+                    showOneInfo(type);
                     document.getElementById("region-name").innerText = response.data.region
                     document.getElementById("rating_val_region").innerText = response.data.rating
-                    document.getElementById("count_val_region").innerText = response.data.count;
+                    if(typeof response.data.count === 'undefined')
+                    {
+                        document.getElementById("region-count").classList.add("no-show");
+                        document.getElementById("count_val_region").classList.add("no-show");
+                    }else{
+                        document.getElementById("region-count").classList.remove("no-show");
+                        document.getElementById("count_val_region").classList.remove("no-show");
+                        document.getElementById("count_val_region").innerText = response.data.count;
+                        document.getElementById("count_val_region").innerText = response.data.count;
+                    }
                 }
             }
         });
-    var popup = L.popup()
-        .setLatLng(popLocation)
-        .setContent('<p>Hello world!<br />This is a nice popup.</p>')
-        .openOn(map);
+    marker.setLatLng(popLocation).addTo(map);
 });
 // var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+function showOneLegend(type)
+{
+    [
+        'maktab',
+        'liveness',
+        'shop',
+        'dtp'
+    ].map((el) => {
+        if(type === el)
+        {
+            document.getElementById(el+'_legend').classList.remove("no-show");
+        }else{
+            document.getElementById(el+'_legend').classList.add("no-show");
+        }
+    })
+}
+
+function showOneInfo(info)
+{
+    ['hex', 'region'].map((el) => {
+        let id = 'infografika-'+el;
+        if(info === el) {
+            document.getElementById(id).classList.remove("no-show");
+        } else {
+            document.getElementById(id).classList.add("no-show");
+        }
+    });
+}
+
 function changeLayer()
 {
     let type = document.getElementById('select-layer').value;
