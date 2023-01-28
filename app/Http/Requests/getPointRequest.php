@@ -26,7 +26,7 @@ class getPointRequest extends FormRequest
         return [
             'lat' => ['required', 'numeric'],
             'long' => ['required', 'numeric'],
-            'layer' => ['required', 'string', 'max:10'],
+            'layer' => ['required', 'string', 'max:20'],
             'zoom' => ['required', 'numeric', 'max:15'],
         ];
     }

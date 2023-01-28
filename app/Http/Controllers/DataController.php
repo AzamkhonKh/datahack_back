@@ -99,15 +99,15 @@ class DataController extends Controller
     public function point(getPointRequest $req)
     {
         $types = [
-            'osm' => '',
-            'osm_liveness_hex' => ['candidate_level'],
-            'osm_liveness_region' => ['candidate_level'],
-            'dtp_hex' => ['stat_total', 'stat_level'],
-            'dtp_region' => ['stat_total', 'stat_level'],
-            'maktab_hex' => ['maktab_total', 'maktab_level'],
-            'maktab_region' => ['maktab_total', 'maktab_level'],
-            'shop_hex' => ['shop_total', 'shop_level'],
-            'shop_region' => ['shop_total', 'shop_level'],
+            'osm' => [''],
+            'osm_liveness_hex' => ['candidate_level as rating'],
+            'osm_liveness_region' => ['candidate_level as rating'],
+            'dtp_hex' => ['stat_total as count', 'stat_level as rating'],
+            'dtp_region' => ['stat_total as count', 'stat_level as rating'],
+            'maktab_hex' => ['maktab_total as count', 'maktab_level as rating'],
+            'maktab_region' => ['maktab_total as count', 'maktab_level as rating'],
+            'shop_hex' => ['shop_total as count', 'shop_level as rating'],
+            'shop_region' => ['shop_total as count', 'shop_level as rating'],
         ];
         $layer = collect(explode('_', request('layer')))->last();
 
@@ -126,18 +126,17 @@ class DataController extends Controller
         {
             $table_name .= 'level_top';
             $way_name = '"pop"."way"';
-
+            $select = array_values($types[request('layer')]);
+            $select[] = $table_name.'.name as region';
             $q = DB::connection('pgsql_gis')
             ->table($table_name)
-            ->select(
-                ...$types[request('layer')]
-            );
+            ->select($select)
+            ->join('planet_osm_polygon as pop', 'pop.osm_id', $table_name . '.osm_id');
         }else{
             return [];
         }
 
         $data = $q
-            ->join('planet_osm_polygon as pop', 'pop.osm_id', $table_name . '.osm_id')
             ->whereRaw(
                 ' ST_CONTAINS(' . $way_name .
                 ', st_transform(
@@ -145,7 +144,6 @@ class DataController extends Controller
                         st_geomfromtext(\'POINT(' . request('lat') . ' ' . request('long') . ')\', 4326)), 3857))'
             )
             ->first();
-        
         return $data;
     
     }
