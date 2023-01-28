@@ -1,0 +1,115 @@
+# For more information: https://laravel.com/docs/sail
+version: '3'
+services:
+    postgres_gis:
+      image: ${POSTGRES_GIS_IMAGE}
+      ports:
+        - 3342:3342
+      networks:
+        - gis
+      restart: unless-stopped
+    komstik.osm:
+      image: ${KOSMTIK_IMAGE}
+      restart: unless-stopped
+      ports:
+        - 6789:6789
+      volumes:
+        - './osm/:/data'
+      networks:
+        - gis
+      depends_on:
+        - postgres_gis
+    komstik.dtp_hex:
+      image: ${KOSMTIK_IMAGE}
+      restart: unless-stopped
+      ports:
+        - 6790:6789
+      volumes:
+        - './osm_dtp_hex/:/data'
+      networks:
+        - gis
+      depends_on:
+        - postgres_gis
+    komstik.dtp_region:
+      image: ${KOSMTIK_IMAGE}
+      restart: unless-stopped
+      ports:
+        - 6791:6789
+      volumes:
+        - './osm_dtp_region/:/data'
+      networks:
+        - gis
+      depends_on:
+        - postgres_gis
+    komstik.shop_hex:
+      image: ${KOSMTIK_IMAGE}
+      restart: unless-stopped
+      ports:
+        - 6792:6789
+      volumes:
+        - './osm_shop_hex/:/data'
+      networks:
+        - gis
+      depends_on:
+        - postgres_gis
+    komstik.shop_region:
+      image: ${KOSMTIK_IMAGE}
+      restart: unless-stopped
+      ports:
+        - 6793:6789
+      volumes:
+        - './osm_shop_region/:/data'
+      networks:
+        - gis
+      depends_on:
+        - postgres_gis
+
+    komstik.maktab_hex:
+      image: ${KOSMTIK_IMAGE}
+      restart: unless-stopped
+      ports:
+        - 6794:6789
+      volumes:
+        - './osm_maktab_hex/:/data'
+      networks:
+        - gis
+      depends_on:
+        - postgres_gis
+    komstik.maktab_region:
+      image: ${KOSMTIK_IMAGE}
+      restart: unless-stopped
+      ports:
+        - 6795:6789
+      volumes:
+        - './osm_maktab_region/:/data'
+      networks:
+        - gis
+      depends_on:
+        - postgres_gis
+
+    komstik.liveness_hex:
+      image: ${KOSMTIK_IMAGE}
+      restart: unless-stopped
+      ports:
+        - 6796:6789
+      volumes:
+        - './osm_liveness_hex/:/data'
+      networks:
+        - gis
+      depends_on:
+        - postgres_gis
+    komstik.liveness_region:
+      image: ${KOSMTIK_IMAGE}
+      restart: unless-stopped
+      ports:
+        - 6797:6789
+      volumes:
+        - './osm_liveness_region/:/data'
+      networks:
+        - gis
+      depends_on:
+        - postgres_gis
+
+networks:
+  gis:
+    driver: bridge

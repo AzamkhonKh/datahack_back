@@ -1,0 +1,10 @@
+@damas-risk-0: #deffff;
+@damas-risk-1: #c1e7eb;
+@damas-risk-2: #a5d0d7;
+@damas-risk-3: #8ab9c4;
+@damas-risk-4: #70a3b2;
+@damas-risk-5: #578ca0;
+@damas-risk-6: #3e768f;
+@damas-risk-7: #24617e;
+@damas-risk-8: #004c6d;
+@damas-risk-9: #002c3f;

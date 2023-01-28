@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::group(['prefix' => 'data'], function () {
+Route::group(['prefix' => 'dtp'], function () {
     Route::get('districts', [DataController::class, 'districts']);
     Route::get('regions', [DataController::class, 'regions']);
     Route::get('accident_types', [DataController::class, 'accident_types']);
@@ -30,3 +30,4 @@ Route::group(['prefix' => 'data'], function () {
     Route::get('road_surface', [DataController::class, 'road_surface']);
     Route::get('accidents', [DataController::class, 'accidents']);
 });
+Route::get('point', [DataController::class, 'point'])->name('getPoint');
