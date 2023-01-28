@@ -1,0 +1,134 @@
+{
+  "id": 28248,
+  "accident_number": "2092",
+  "card_number": "28248-270621",
+  "accident_type": {
+    "id": 1,
+    "name_uz": "to'qnashuv",
+    "name_oz": "\u0442\u045e\u049b\u043d\u0430\u0448\u0443\u0432",
+    "name_ru": "\u0421\u0442\u043e\u043b\u043a\u043d\u043e\u0432\u0435\u043d\u0438\u0435"
+  },
+  "date_accident": "2014-12-22T04:35:00",
+  "region": {
+    "id": 1,
+    "name_uz": "Toshkent shahri",
+    "name_oz": "\u0422\u043e\u0448\u043a\u0435\u043d\u0442 \u0448\u0430\u04b3\u0440\u0438",
+    "name_ru": "\u0433\u043e\u0440\u043e\u0434\u00a0\u0422\u0430\u0448\u043a\u0435\u043d\u0442"
+  },
+  "district": {
+    "id": 11,
+    "name_uz": "Yashnobod tumani",
+    "name_oz": "\u042f\u0448\u043d\u043e\u0431\u043e\u0434 \u0442\u0443\u043c\u0430\u043d\u0438",
+    "name_ru": "\u042f\u0448\u043d\u043e\u0431\u0430\u0434\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d"
+  },
+  "location": "",
+  "street_name": "\u0422\u0425\u0410\u0419 \u041a\u0423\u0427\u0410\u0421\u0418  \u0411\u0415\u041a\u0422\u0415\u041c\u0418\u0420 \u041c\u0415\u0422\u0410\u041d \u0413\u0410\u0417 \u041a\u0423\u0419\u0418\u0428 \u0428\u0410\u0425\u041e\u0411. \u041a\u0410\u0420\u0428, ",
+  "distance_from": null,
+  "road_surface": {
+    "id": 1,
+    "name_uz": "asfalt (beton) qoplamali",
+    "name_oz": "\u0430\u0441\u0444\u0430\u043b\u044c\u0442 (\u0431\u0435\u0442\u043e\u043d) \u049b\u043e\u043f\u043b\u0430\u043c\u0430\u043b\u0438",
+    "name_ru": "\u0430\u0441\u0444\u0430\u043b\u044c\u0442\u043d\u043e\u0435 (\u0431\u0435\u0442\u043e\u043d\u043d\u043e\u0435) \u043f\u043e\u043a\u0440\u044b\u0442\u0438\u0435"
+  },
+  "road_condition": {
+    "id": 1,
+    "name_uz": "quruq",
+    "name_oz": "\u049b\u0443\u0440\u0443\u049b",
+    "name_ru": "\u0441\u0443\u0445\u043e\u0435"
+  },
+  "weather_condition": null,
+  "road_part": null,
+  "accident_causal": [],
+  "participants": [
+    {
+      "id": 224215,
+      "vehicle": 136195,
+      "type": "driver",
+      "violation": [
+        {
+          "id": 3,
+          "name_uz": "svetoforga rioya qilmaslik",
+          "name_oz": "\u0441\u0432\u0435\u0442\u043e\u0444\u043e\u0440\u0433\u0430 \u0440\u0438\u043e\u044f \u049b\u0438\u043b\u043c\u0430\u0441\u043b\u0438\u043a",
+          "name_ru": "\u043d\u0435\u0441\u043e\u0431\u043b\u044e\u0434\u0435\u043d\u0438\u0435 \u0441\u0432\u0435\u0442\u043e\u0444\u043e\u0440\u0430"
+        }
+      ],
+      "age": 63,
+      "gender_type": "male",
+      "health_condition": ""
+    },
+    {
+      "id": 224216,
+      "vehicle": 136196,
+      "type": "driver",
+      "violation": [],
+      "age": 35,
+      "gender_type": "male",
+      "health_condition": ""
+    },
+    {
+      "id": 336790,
+      "vehicle": 216445,
+      "type": "driver",
+      "violation": [],
+      "age": 53,
+      "gender_type": "male",
+      "health_condition": "injured"
+    },
+    {
+      "id": 336791,
+      "vehicle": 136196,
+      "type": "passenger",
+      "violation": [],
+      "age": 22,
+      "gender_type": "female",
+      "health_condition": "injured"
+    },
+    {
+      "id": 336792,
+      "vehicle": 136196,
+      "type": "passenger",
+      "violation": [],
+      "age": 18,
+      "gender_type": "female",
+      "health_condition": "injured"
+    },
+    {
+      "id": 336793,
+      "vehicle": 136196,
+      "type": "passenger",
+      "violation": [],
+      "age": 21,
+      "gender_type": "female",
+      "health_condition": "injured"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": 136195,
+      "technical_issues": [],
+      "vehicle_brand": null,
+      "vehicle_model": null,
+      "vehicle_type": null,
+      "vehicle_color": null,
+      "year_manufacture": 2014
+    },
+    {
+      "id": 136196,
+      "technical_issues": [],
+      "vehicle_brand": null,
+      "vehicle_model": null,
+      "vehicle_type": null,
+      "vehicle_color": null,
+      "year_manufacture": 2009
+    },
+    {
+      "id": 216445,
+      "technical_issues": [],
+      "vehicle_brand": null,
+      "vehicle_model": null,
+      "vehicle_type": null,
+      "vehicle_color": null,
+      "year_manufacture": null
+    }
+  ]
+}
