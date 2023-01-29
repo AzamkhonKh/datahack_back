@@ -1,4 +1,4 @@
-<div id="liveness_legend" class="no-show">
+<div id="osm_liveness_legend" class="no-show">
     <h2>
         Легенда
     </h2>

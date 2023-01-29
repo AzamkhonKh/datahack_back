@@ -53,7 +53,6 @@ map.on('click', function(e) {
             {
                 document.getElementById("infografika-title").classList.add("no-show");
                 let type = current_type.split('_').pop();
-                showOneLegend(current_type.split('_')[0]);
                 if(type === 'osm'){
                     document.getElementById("infografika-title").classList.remove("no-show");
                 } else if (type === 'hex')
@@ -92,13 +91,23 @@ map.on('click', function(e) {
 // var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 function showOneLegend(type)
 {
+    showOneInfo('qw');
+    let new_type;
+    let work = type.split('_');
+    if(work[0] === 'osm' && work.length !== 1)
+    {
+        new_type = 'osm_liveness';
+    }else{
+        new_type = work[0];
+    }
+
     [
         'maktab',
-        'liveness',
+        'osm_liveness',
         'shop',
         'dtp'
     ].map((el) => {
-        if(type === el)
+        if(new_type === el)
         {
             document.getElementById(el+'_legend').classList.remove("no-show");
         }else{
@@ -129,6 +138,7 @@ function changeLayer()
         map.removeLayer(current_layer);
         current_layer = new_layer;
         current_type = type;
+        showOneLegend(current_type);
     }
 }
 

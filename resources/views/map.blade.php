@@ -89,7 +89,7 @@
                 </div>
             </div>
             <div class="row flex-grow-1 mt-0 align-self-stretch" style="margin-top: 0px!important;">
-                <div class="col-3 nav_left ">
+                <div class="col-12 col-md-3 nav_left ">
                     <div id="infografika-title">
                         <h1> 
                             Нажмите на карту 
@@ -143,7 +143,7 @@
                     @include('legend.maktab_legend')
                     @include('legend.shop_legend')
                 </div>
-                <div class="col-9 p-0">
+                <div class="col-12 col-md-9 p-0" style="height: 100%;">
 
                     <div class="map">
                         <div id="map"></div>
