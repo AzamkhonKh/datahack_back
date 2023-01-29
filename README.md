@@ -1,5 +1,10 @@
 # JOY - TOP data aggregation platform
-<img src="https://github.com/AzamkhonKh/datahack_back/blob/master/public/images/jt_logo.png" width="400" alt="Laravel Logo"></a></p>
+
+<img 
+src="https://github.com/AzamkhonKh/datahack_back/blob/master/public/images/jt_logo.png" 
+width="400" 
+style="background-color: white !important;" 
+alt="JOY TOP LOGO">
 
 ## About
 
